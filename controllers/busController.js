@@ -53,6 +53,16 @@ const createBus = async (req, res) => {
     res.status(400).json({ error: error.message });
   }
 };
+
+const getTotalBuses = async (req, res) => {
+  try {
+    const count = await Bus.countDocuments();
+    res.status(200).json({ total: count });
+  } catch (error) {
+    console.error('Error fetching total buses:', error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+};
   
 const updateBus = async (req, res) => {
   const { id } = req.params;
@@ -89,6 +99,7 @@ module.exports = {
     getAllBuses,
     getBus,
     createBus,
+    getTotalBuses,
     deleteBus,
-    updateBus
+    updateBus,
 }

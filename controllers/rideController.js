@@ -17,8 +17,6 @@ const getRides = async (req, res) => {
 };
 
 
-
-
 const getRideById = async (req, res) => {
   const rideId = req.params.rideId;
   try {
@@ -207,6 +205,16 @@ const createRide = async (req, res) => {
   }
 };
 
+const getTotalRides = async (req, res) => {
+  try {
+    const count = await Ride.countDocuments();
+    res.status(200).json({ total: count });
+  } catch (error) {
+    console.error('Error fetching total rides:', error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+};
+
 module.exports = {
   createRide,
   calculateRidePrice,
@@ -214,4 +222,5 @@ module.exports = {
   getRideById,
   getAllRides,
   getRide,
+  getTotalRides, 
 };

@@ -1,5 +1,3 @@
-
-// ride.js
 const express = require('express');
 const router = express.Router();
 const {
@@ -9,12 +7,15 @@ const {
   getAllRides,
   getRide,
   calculateRidePrice,
+  getTotalRides // Import the function
 } = require('../controllers/rideController');
+
 router.get('/taxi/:user_id', getRides);
 router.get('/ride/:rideId', getRideById);
 router.get('/', getAllRides);
 router.get('/:id', getRide);
 router.post('/authenticated', createRide);
+router.get('/total/count', getTotalRides); // Add this line
 
 router.post('/price', async (req, res) => {
   const { stations } = req.body;
